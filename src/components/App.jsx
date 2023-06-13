@@ -3,6 +3,7 @@ import Searchbar from "./Searchbar";
 import ImageGallery from "./ImageGallery";
 import Loader from "./Loader";
 import Button from "./Button";
+import ImageInfo from "./ImageInfo";
 
 export class App extends React.Component {
   state = {
@@ -17,9 +18,10 @@ export class App extends React.Component {
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
-    <ImageGallery/>
-    <Loader/>
-    <Button/>
+        <ImageInfo imageName={this.state.imageName} />
+    {/* <ImageGallery/> */}
+    {/* <Loader/> */}
+    {/* <Button/> */}
     {/* <Modal/> */}
       </div>)
     }

@@ -6,14 +6,17 @@ export default class Searchbar extends React.Component {
     };
 
     handleNameChange = e => {
-        this.setState({ imageName: e.currentTarget.value.toLowerCase() });
+
+        this.setState({
+            imageName: e.currentTarget.value.toLowerCase()
+        })
     }
 
     handleSubmit = e => {
         e.preventDefault();
 
         if (this.state.imageName.trim() === '') {
-            alert('Введите имя покемона.');
+            alert('Введите текст');
             return;
         }
         
@@ -22,19 +25,21 @@ export default class Searchbar extends React.Component {
     };
 
     render() { 
-        return (<header className="searchbar">
-            <form className="form"
-                onSubmit={this.handleSubmit}>
-                <button type="submit" className="button">
-                    <span className="button-label">
+        return (<header className="">
+            <form className="SearchForm"
+                  onSubmit={this.handleSubmit}>
+                <button type="submit"
+                        className="SearchForm-button">
+                    <span className="SearchForm-button-label">
                         Search
                     </span>
                 </button>
                 <input 
                     value={this.state.imageName}
                     onChange={this.handleNameChange}
+                    name="query"
                     type="text"
-                    className="input"
+                    className="SearchForm-input"
                     autoComplete="off"
                     autoFocus
                     placeholder="Search images and photos" />
