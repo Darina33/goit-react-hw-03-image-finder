@@ -1,42 +1,46 @@
 import React from "react";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import PropTypes from 'prop-types';
+
+import { ReactComponent as Search } from "./Search.svg";
 
 export default class Searchbar extends React.Component {
     state = {
-        imageName: '',
+        query: '',
     };
 
-    handleNameChange = e => {
+    handleChange = e => {
 
         this.setState({
-            imageName: e.currentTarget.value.toLowerCase()
+            query: e.currentTarget.value.toLowerCase()
         })
     }
 
     handleSubmit = e => {
         e.preventDefault();
 
-        if (this.state.imageName.trim() === '') {
-            alert('Введите текст');
+        if (this.state.query.trim() === '') {
+            Notify.warning('Enter text');
             return;
         }
         
-        this.props.onSubmit(this.state.imageName);
-        this.setState({ imageName: '' })
+        this.props.onSubmit(this.state.query);
+        this.setState({ query: '' })
     };
 
     render() { 
-        return (<header className="">
+        const { query } = this.state;
+
+        return (<header className="Searchbar">
             <form className="SearchForm"
                   onSubmit={this.handleSubmit}>
                 <button type="submit"
                         className="SearchForm-button">
-                    <span className="SearchForm-button-label">
-                        Search
-                    </span>
+                    <Search width="30" height="30" />
                 </button>
                 <input 
-                    value={this.state.imageName}
-                    onChange={this.handleNameChange}
+                    value={query}
+                    onChange={this.handleChange}
                     name="query"
                     type="text"
                     className="SearchForm-input"
@@ -48,3 +52,7 @@ export default class Searchbar extends React.Component {
         )
     }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

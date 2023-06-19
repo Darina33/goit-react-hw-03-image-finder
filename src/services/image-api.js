@@ -1,15 +1,13 @@
-function fetchImage(name) {
-    return fetch(`https://pixabay.com/api/?q=${name}&page=1&key=35592946-b30e38cecc5f402f2c111ab69&image_type=photo&orientation=horizontal&per_page=12`).then(response => {
-    if (response.ok) {
-        return response.json();
-    }
+import axios from 'axios';
 
-    return Promise.reject(new Error(`Sorry, you are not allowed to ${name}`));
-})
-}
+axios.defaults.baseURL = 'https://pixabay.com/api';
 
-const api = {
-    fetchImage,
-}
+const fetchImages = async (query, currentPage) => {
+  const { data } = await axios.get(
+    `/?q=${query}&page=${currentPage}&key=35592946-b30e38cecc5f402f2c111ab69&image_type=photo&orientation=horizontal&per_page=12`,
+  );
 
-export default api;
+  return data;
+};
+
+export default fetchImages;
